@@ -24,6 +24,14 @@ public class ArrayPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        // TODO: fill me in!
+        g.setColor(getBackground());
+        g.fillRect(0, 0, getWidth(), getHeight());
+        Integer[] indices = notes.getNotes();
+        int width = getWidth() / indices.length;
+        int height = getHeight() /indices.length;
+        for (int i = 0; i < indices.length; i++){
+            g.setColor(notes.getColor(i));
+            g.fillRect(i * width, getHeight() - indices[i] * height, width, indices[i] * height);
+        }
     }
 }
