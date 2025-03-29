@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * indices in the array.
  */
 public class CompareEvent<T> {
-    // TODO: implement me!
     private final int index1;
     private final int index2;
 
@@ -27,6 +26,6 @@ public class CompareEvent<T> {
     }
 
     public boolean isEmphasized(){
-        return true;
+        return false;
     }
 }
