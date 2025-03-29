@@ -45,9 +45,9 @@ public class Sorts {
         List<SortEvent<Integer>> events = new ArrayList<>();
         for (i = 0; i < arr.length; i++) {
             for (j = 0; j < arr.length - i - 1; j++) {
-                events.add(new CompareEvent(j, j + 1));
+                //events.add(new CompareEvent(j, j + 1));
                 if (arr[j].compareTo(arr[j + 1]) > 0) {
-                    events.add(new SwapEvent(arr, j, j + 1));
+                    //events.add(new SwapEvent(arr, j, j + 1));
                     swap(arr, j, j + 1);
                 }
             }
@@ -111,8 +111,6 @@ public class Sorts {
         return events;
     }
     
-    public class MergeSort {
-    
         /**
          * Sorts the array according to the merge sort algorithm.
          * 
@@ -137,8 +135,6 @@ public class Sorts {
             for (int j = 0; j < n2; ++j)
             events.add(new copyEvent<>(R, j, arr[m + 1 + j]));
                 R[j] = arr[m + 1 + j];
-    
-            // Merge the temp arrays
             int i = 0, j = 0;
             int k = l;
             while (i < n1 && j < n2) {
@@ -153,15 +149,13 @@ public class Sorts {
                 k++;
             }
     
-            // Copy remaining elements of L[] if any
             while (i < n1) {
                 events.add(new CopyEvent<>(L, i, arr[k]));
                 arr[k] = L[i];
                 i++;
                 k++;
             }
-    
-            // Copy remaining elements of R[] if any
+
             while (j < n2) {
                 events.add(new CopyEvent<>(R, j, arr[k]));
                 arr[k] = R[j];
@@ -196,12 +190,10 @@ public class Sorts {
                 int m = l + (r - l) / 2;
                 sort(arr, l, m);
                 sort(arr, m + 1, r);
-    
-                // Merge the sorted halves
                 merge(arr, l, m, r);
             }
         }
-    }
+    
     
 
     /**
@@ -217,19 +209,21 @@ public class Sorts {
         List<SortEvent<Integer>> events = new ArrayList<>();
         if (l >= r) {
             return events;
-            ;
         }
         T pivot = arr[l + (r - l) / 2];
         int i = l, j = r;
 
         while (i <= j) {
+            events.add(new CompareEvent<>(i, l + (r - l) / 2));
             while (arr[i].compareTo(pivot) < 0) {
                 i++;
             }
+            events.add(new CompareEvent<>(i, l + (r - l) / 2)); 
             while (arr[i].compareTo(pivot) < 0) {
                 j--;
             }
             if (i <= j) {
+                events.add(new CompareEvent<>(i, j));
                 swap(arr, i, j);
                 i++;
                 j--;
@@ -242,5 +236,6 @@ public class Sorts {
         if (i < r) {
             quickSort(arr);
         }
+        return events;
     }
 }

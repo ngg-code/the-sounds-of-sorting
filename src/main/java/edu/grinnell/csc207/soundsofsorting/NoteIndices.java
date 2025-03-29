@@ -36,7 +36,7 @@ public class NoteIndices {
         }
 
         // Shuffle the indices to start with a random order
-        Collections.shuffle(indices);
+        Collections.shuffle(indices, new Random());
         highlighted = new boolean[n];
     }
 
