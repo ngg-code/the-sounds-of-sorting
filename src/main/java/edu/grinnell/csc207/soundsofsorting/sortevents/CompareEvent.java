@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * A <code>CompareEvent</code> logs a comparison a sort makes between two
  * indices in the array.
  */
-public class CompareEvent<T> {
+public class CompareEvent<T> implements SortEvent<T> {
     private final int index1;
     private final int index2;
 
