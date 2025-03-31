@@ -137,16 +137,15 @@ public class ControlPanel extends JPanel {
                 }
                 isSorting = true;
 
-                // TODO: fill me in!
+                
                 // 1. Create the sorting events list
-                Integer[] arr = notes.getNotes();
                 // 2. Add in the compare events to the end of the list
+                Integer[] arr = notes.getNotes();
                 List<SortEvent<Integer>> events = new java.util.LinkedList<>();
-                events = generateEvents((String) sorts.getSelectedItem(), arr);
-
-                for (int i = 0; i < arr.length - 1; i++) {
-                    for (int j = i + 1; j < arr.length; j++) {
-                        events.add(new SortEvent<>(List.of(i, j), false)); // Compare events
+                List<SortEvent<Integer>> events1 = generateEvents((String) sorts.getSelectedItem(), arr);
+                for(int i = 0; i < events1.size(); i++){
+                    if(!(events.get(i).isEmphasized())){
+                        events.add(events1.get(i));
                     }
                 }
                 // NOTE: The Timer class repetitively invokes a method at a
@@ -162,15 +161,14 @@ public class ControlPanel extends JPanel {
                     public void run() {
                         if (index < events.size()) {
                             SortEvent<Integer> e = events.get(index++);
-                            // TODO: fill me in!
                             // 1. Apply the next sort event.
-                            events.apply(arr);
+                            e.apply(arr);
 
                             // 3. Play the corresponding notes denoted by the
-                            List<Integer> affected = event.getAffectedIndices();
+                            List<Integer> affected = e.getAffectedIndices();
                             for (int idx : affected) {
                                 int noteValue = scale.get(arr[idx]);
-                                scale.playNote(noteValue);
+                                scale.playNote(noteValue, e.isEmphasized());
                             }
                             // affected indices logged in the event.
                             // 4. Highlight those affected indices.
