@@ -5,10 +5,9 @@ import java.util.ArrayList;
 /**
  * A <code>SwapEvent</code> logs a swap between two indices of the array.
  */
-public class SwapEvent<T> {
+public class SwapEvent<T> implements SortEvent<T>{
   private final int index1;
   private final int index2;
-  public T[] arr;
 
   /**
    * constructs a <code> swap event</code> with the given indices
@@ -17,11 +16,9 @@ public class SwapEvent<T> {
    * @param index2 the second index to swap
    */
 
-  public SwapEvent(T[] arr, int index1, int index2) {
+  public SwapEvent(int index1, int index2) {
     this.index1 = index1;
     this.index2 = index2;
-    this.arr = arr;
-
   }
 
   /**
