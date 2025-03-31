@@ -53,4 +53,11 @@ public class Scale {
     public void playNote(int index, boolean emphasized) {
         instrument.noteOn(notes[index], emphasized ? EMPHASIZED_VELOCITY : REGULAR_VELOCITY);
     }
+
+    public int get(int index) {
+        if (index < 0 || index >= notes.length) {
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds for scale of size " + notes.length);
+        }
+        return notes[index];
+    }
 }
