@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class CopyEvent<T> implements SortEvent<T>{
     private final int index1;
     private final int index2;
-    public T[] arr;
 
     public CopyEvent(int idx1, int idx2) {
         this.index1 = idx1;

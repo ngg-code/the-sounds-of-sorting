@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
 
-
 import edu.grinnell.csc207.soundsofsorting.sorts.Sorts;
 
 public class SortsTests {
@@ -158,6 +157,31 @@ public class SortsTests {
 
         Integer[] arr5 = { 100 };
         Sorts.quickSort(arr5);
+        assertArrayEquals(new Integer[] { 100 }, arr5);
+    }
+
+    @Test
+    public void testHeapSort() {
+        testSort(Sorts::heapSort); // Test generic sorting functionality
+
+        Integer[] arr1 = { 5, 2, 9, 1, 5, 6 };
+        Sorts.heapSort(arr1);
+        assertArrayEquals(new Integer[] { 1, 2, 5, 5, 6, 9 }, arr1);
+
+        Integer[] arr2 = { 3, 3, 3, 3 };
+        Sorts.heapSort(arr2);
+        assertArrayEquals(new Integer[] { 3, 3, 3, 3 }, arr2);
+
+        Integer[] arr3 = { 1, 2, 3, 4, 5 };
+        Sorts.heapSort(arr3);
+        assertArrayEquals(new Integer[] { 1, 2, 3, 4, 5 }, arr3);
+
+        Integer[] arr4 = {};
+        Sorts.heapSort(arr4);
+        assertArrayEquals(new Integer[] {}, arr4);
+
+        Integer[] arr5 = { 100 };
+        Sorts.heapSort(arr5);
         assertArrayEquals(new Integer[] { 100 }, arr5);
     }
 }

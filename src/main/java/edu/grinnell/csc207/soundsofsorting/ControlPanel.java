@@ -51,6 +51,8 @@ public class ControlPanel extends JPanel {
                 return Sorts.mergeSort(arr);
             case ("Quick"):
                 return Sorts.quickSort(arr);
+            case "Heap":
+                return Sorts.heapSort(arr);
             default:
                 throw new IllegalArgumentException("generateEvents");
         }
@@ -102,7 +104,8 @@ public class ControlPanel extends JPanel {
                 "Insertion",
                 "Bubble",
                 "Merge",
-                "Quick"
+                "Quick",
+                "Heap"
         });
         add(sorts);
 
@@ -137,14 +140,18 @@ public class ControlPanel extends JPanel {
                 }
                 isSorting = true;
 
-                
                 // 1. Create the sorting events list
                 // 2. Add in the compare events to the end of the list
-                Integer[] arr = notes.getNotes();
+                // Integer[] arr = notes.getNotes();
                 List<SortEvent<Integer>> events = new java.util.LinkedList<>();
-                List<SortEvent<Integer>> events1 = generateEvents((String) sorts.getSelectedItem(), arr);
-                for(int i = 0; i < events1.size(); i++){
-                    if(!(events.get(i).isEmphasized())){
+                List<SortEvent<Integer>> events1 = generateEvents((String) sorts.getSelectedItem(), notes.getNotes());
+                for (int i = 0; i < events1.size(); i++) {
+                    if ((events1.get(i).isEmphasized())) {
+                        events.add(events1.get(i));
+                    }
+                }
+                for (int i = 0; i < events1.size(); i++) {
+                    if (!(events1.get(i).isEmphasized())) {
                         events.add(events1.get(i));
                     }
                 }
@@ -162,13 +169,19 @@ public class ControlPanel extends JPanel {
                         if (index < events.size()) {
                             SortEvent<Integer> e = events.get(index++);
                             // 1. Apply the next sort event.
-                            e.apply(arr);
+                            e.apply(notes.getNotes());
+                            panel.repaint();
 
                             // 3. Play the corresponding notes denoted by the
                             List<Integer> affected = e.getAffectedIndices();
-                            for (int idx : affected) {
-                                int noteValue = scale.get(arr[idx]);
-                                scale.playNote(noteValue, e.isEmphasized());
+                            for (int i = 0; i < 2; i++) {
+                                int idx = affected.get(i);
+                                // int noteValue = scale.get(idx);
+                                // System.out.println("Playing note: " + noteValue);
+                                System.out.println("idx: " + idx);
+                                System.out.println("isEmphasized: " + e.isEmphasized());
+                                scale.playNote(idx, e.isEmphasized());
+                                panel.repaint();
                             }
                             // affected indices logged in the event.
                             // 4. Highlight those affected indices.

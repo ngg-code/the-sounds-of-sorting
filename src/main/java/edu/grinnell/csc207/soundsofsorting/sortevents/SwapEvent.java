@@ -25,7 +25,6 @@ public class SwapEvent<T> implements SortEvent<T>{
    * apply the swap event to the given array
    * 
    * @param arr the array to swap
-   * @Overide
    */
 
   public void apply(T[] arr) {
@@ -38,8 +37,6 @@ public class SwapEvent<T> implements SortEvent<T>{
    * get afffected indices of the swap event
    * 
    * @return list of the affected indices
-   * 
-   * @Override
    */
 
   public List<Integer> getAffectedIndices() {
@@ -54,7 +51,6 @@ public class SwapEvent<T> implements SortEvent<T>{
    * 
    * @return true if this event should be emphasized by the
    *         visualizer/audibilizer.
-   * @overide
    */
 
   public boolean isEmphasized() {

@@ -1,7 +1,7 @@
 package edu.grinnell.csc207.soundsofsorting;
+
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
 import java.util.Random;
 
@@ -11,14 +11,17 @@ import java.util.Random;
  * in the program.
  */
 public class NoteIndices {
-    private List<Integer> indices;
+    private int[] indices;
     private boolean[] highlighted;
+    private int size;
 
     /**
      * @param n the size of the scale object that these indices map into
      */
     public NoteIndices(int n) {
-        initializeAndShuffle(n);
+        this.size = n;
+        this.indices = new int[n];
+        this.highlighted = new boolean[n];
     }
 
     /**
@@ -29,20 +32,39 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public void initializeAndShuffle(int n) {
-
-        indices = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            indices.add(i);
+            indices[i] = i;
         }
 
+        ArrayList<Integer> indicesList = new ArrayList<Integer>();
+        for (int i = 0; i < n; i++) {
+            indicesList.add(i);
+        }
         // Shuffle the indices to start with a random order
-        Collections.shuffle(indices, new Random());
-        highlighted = new boolean[n];
+        Collections.shuffle(indicesList, new Random());
+        for (int i = 0; i < n; i++) {
+            indices[i] = indicesList.get(i);
+        }
+        for (int i = 0; i < highlighted.length; i++) {
+            highlighted[i] = false;
+        }
     }
 
     /** @return the indices of this NoteIndices object */
     public Integer[] getNotes() {
-        return indices.toArray(new Integer[0]);
+        Integer[] notes1 = new Integer[size];
+        for (int i = 0; i < size; i++) {
+            notes1[i] = indices[i];
+        }
+        return notes1;
+    }
+
+    public int getNote(int index) {
+        if (index >= 0 && index < size) {
+            return indices[index];
+        } else {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
     }
 
     /**
@@ -71,13 +93,37 @@ public class NoteIndices {
         }
     }
 
+    public int getMaxValue() {
+        int max = 0;
+        for (int i = 0; i < size; i++) {
+            if (indices[i] > max) {
+                max = indices[i];
+            }
+        }
+        return max;
+    }
+
     public Color getColor(int index) {
         if (isHighlighted(index)) {
             // If the note is highlighted, return a different color
             return Color.red; // Highlighted color
         } else {
-            // Otherwise, return a default color
-            return Color.blue; // Default color for notes
+            int value = indices[index];
+            int max = getMaxValue();
+
+            // Normalize to [0, 1]
+            float ratio = (float) value / max;
+
+            // Interpolate from green (low) to blue (high)
+            int red = 0;
+            int green = (int) ((1 - ratio) * 180); // Bright green when small
+            int blue = (int) (ratio * 255); // Bright blue when large
+
+            return new Color(red, green, blue);
         }
+    }
+
+    public int size() {
+        return size;
     }
 }
