@@ -1,6 +1,7 @@
 package edu.grinnell.csc207.soundsofsorting;
 
 import java.awt.Color;
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -11,7 +12,7 @@ import java.util.Random;
  * in the program.
  */
 public class NoteIndices {
-    private int[] indices;
+    private Integer[] indices;
     private boolean[] highlighted;
     private int size;
 
@@ -19,9 +20,7 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public NoteIndices(int n) {
-        this.size = n;
-        this.indices = new int[n];
-        this.highlighted = new boolean[n];
+        initializeAndShuffle(n);
     }
 
     /**
@@ -32,6 +31,9 @@ public class NoteIndices {
      * @param n the size of the scale object that these indices map into
      */
     public void initializeAndShuffle(int n) {
+        this.indices = new Integer[n];
+        this.highlighted = new boolean[n];
+        this.size = n;
         for (int i = 0; i < n; i++) {
             indices[i] = i;
         }
