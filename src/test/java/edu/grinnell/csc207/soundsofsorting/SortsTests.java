@@ -66,9 +66,9 @@ public class SortsTests {
     @Test
     public void testInsertionSort() {
         testSort(Sorts::insertionSort);
-        Integer[] arr1 = { 5, 2, 9, 1, 5, 6 };
+        Integer[] arr1 = { 5, 2, 9, 1, 5, 6, 5, 2, 9, 1, 5, 6 };
         Sorts.insertionSort(arr1);
-        assertArrayEquals(new Integer[] { 1, 2, 5, 5, 6, 9 }, arr1);
+        assertArrayEquals(new Integer[] { 1, 1, 2, 2, 5, 5, 5, 5, 6, 6, 9, 9 }, arr1);
 
         Integer[] arr2 = { 3, 3, 3, 3 };
         Sorts.insertionSort(arr2);

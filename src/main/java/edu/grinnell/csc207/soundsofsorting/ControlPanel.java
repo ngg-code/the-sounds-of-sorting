@@ -142,19 +142,8 @@ public class ControlPanel extends JPanel {
 
                 // 1. Create the sorting events list
                 // 2. Add in the compare events to the end of the list
-                // Integer[] arr = notes.getNotes();
-                List<SortEvent<Integer>> events = new java.util.LinkedList<>();
-                List<SortEvent<Integer>> events1 = generateEvents((String) sorts.getSelectedItem(), notes.getNotes());
-                for (int i = 0; i < events1.size(); i++) {
-                    if ((events1.get(i).isEmphasized())) {
-                        events.add(events1.get(i));
-                    }
-                }
-                for (int i = 0; i < events1.size(); i++) {
-                    if (!(events1.get(i).isEmphasized())) {
-                        events.add(events1.get(i));
-                    }
-                }
+                Integer[] arr = notes.getNotes();
+                List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), arr);
                 // NOTE: The Timer class repetitively invokes a method at a
                 // fixed interval. Here we are specifying that method
                 // by creating an _anonymous subclass_ of the TimeTask
@@ -169,27 +158,26 @@ public class ControlPanel extends JPanel {
                         if (index < events.size()) {
                             SortEvent<Integer> e = events.get(index++);
                             // 1. Apply the next sort event.
-                            e.apply(notes.getNotes());
-                            panel.repaint();
+                            e.apply(arr);
+
+                            for (int i = 0; i < arr.length; i++) {
+                                notes.setNote(i, arr[i]);
+                            }
 
                             // 3. Play the corresponding notes denoted by the
                             List<Integer> affected = e.getAffectedIndices();
-                            for (int i = 0; i < 2; i++) {
-                                int idx = affected.get(i);
-                                // int noteValue = scale.get(idx);
-                                // System.out.println("Playing note: " + noteValue);
-                                System.out.println("idx: " + idx);
-                                System.out.println("isEmphasized: " + e.isEmphasized());
-                                scale.playNote(idx, e.isEmphasized());
-                                panel.repaint();
-                            }
-                            // affected indices logged in the event.
-                            // 4. Highlight those affected indices.
                             notes.clearAllHighlighted();
                             for (int idx : affected) {
                                 notes.highlightNote(idx);
+                                if (idx >= 0 && idx < scale.size()) {
+                                    scale.playNote(idx, e.isEmphasized());
+                                }
                             }
+
                             panel.repaint();
+                            // affected indices logged in the event.
+                            // 4. Highlight those affected indices.
+
                         } else {
                             this.cancel();
                             panel.repaint();

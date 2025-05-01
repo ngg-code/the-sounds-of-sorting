@@ -1,11 +1,12 @@
 package edu.grinnell.csc207.soundsofsorting.sortevents;
+
 import java.util.List;
 import java.util.ArrayList;
 
 /**
  * A <code>CopyEvent</code> logs a copy of a value into an index of the array.
  */
-public class CopyEvent<T> implements SortEvent<T>{
+public class CopyEvent<T> implements SortEvent<T> {
     private final int index1;
     private final int index2;
 
@@ -14,12 +15,11 @@ public class CopyEvent<T> implements SortEvent<T>{
         this.index2 = idx2;
     }
 
-
     public void apply(T[] arr) {
-        arr[index1] =  arr[index2];
+        arr[index1] = arr[index2];
     }
 
-    public List<Integer> getAffectedIndices(){
+    public List<Integer> getAffectedIndices() {
         List<Integer> affectedIndices = new ArrayList<>();
         affectedIndices.add(index1);
         affectedIndices.add(index2);

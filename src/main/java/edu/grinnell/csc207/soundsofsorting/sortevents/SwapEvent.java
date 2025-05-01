@@ -1,11 +1,12 @@
 package edu.grinnell.csc207.soundsofsorting.sortevents;
+
 import java.util.List;
 import java.util.ArrayList;
 
 /**
  * A <code>SwapEvent</code> logs a swap between two indices of the array.
  */
-public class SwapEvent<T> implements SortEvent<T>{
+public class SwapEvent<T> implements SortEvent<T> {
   private final int index1;
   private final int index2;
 

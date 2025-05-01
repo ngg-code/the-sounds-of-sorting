@@ -1,4 +1,5 @@
 package edu.grinnell.csc207.soundsofsorting.sortevents;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,17 +16,17 @@ public class CompareEvent<T> implements SortEvent<T> {
         this.index2 = index2;
     }
 
-    public void apply (T[] arr){
+    public void apply(T[] arr) {
     }
 
-    public List<Integer> getAffectedIndices(){
+    public List<Integer> getAffectedIndices() {
         List<Integer> affectedIndices = new ArrayList<>();
         affectedIndices.add(index1);
         affectedIndices.add(index2);
         return affectedIndices;
     }
 
-    public boolean isEmphasized(){
+    public boolean isEmphasized() {
         return false;
     }
 }

@@ -117,11 +117,13 @@ public class Sorts {
      * @param m   the middle index
      * @param r   the right index
      */
-    public static <T extends Comparable<? super T>> List<SortEvent<Integer>> merge(
+    public static <T extends Comparable<? super T>> 
+    List<SortEvent<Integer>> merge(
             T[] arr,
-            int l,
-            int m,
-            int r) {
+             int l,
+              int m,
+               int r
+               ) {
         List<SortEvent<Integer>> events = new ArrayList<>();
         int n1 = m - l + 1;
         int n2 = r - m;

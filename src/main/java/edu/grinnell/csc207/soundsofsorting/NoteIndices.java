@@ -68,6 +68,20 @@ public class NoteIndices {
     }
 
     /**
+     * Sets the value at the specified index
+     * 
+     * @param index the index to update
+     * @param value the new value to set
+     */
+    public void setNote(int index, int value) {
+        if (index >= 0 && index < size) {
+            indices[index] = value;
+        } else {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
+    }
+
+    /**
      * Highlights the given index of the note array
      * 
      * @param index the index to highlight
@@ -126,4 +140,5 @@ public class NoteIndices {
     public int size() {
         return size;
     }
+
 }
