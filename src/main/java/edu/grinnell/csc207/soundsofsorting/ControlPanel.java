@@ -147,7 +147,8 @@ public class ControlPanel extends JPanel {
                 }
 
                 // Generate sorting events
-                List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), notesCopy);
+                List<SortEvent<Integer>> events = generateEvents(
+                        (String) sorts.getSelectedItem(), notesCopy);
 
                 // Reset the notesCopy since the generateEvents method already sorted it
                 for (int i = 0; i < notes.size(); i++) {
