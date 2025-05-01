@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * A <code>SwapEvent</code> logs a swap between two indices of the array.
+ * A SwapEvent logs a swap between two indices of the array.
  */
 public class SwapEvent<T> implements SortEvent<T> {
   private final int index1;
   private final int index2;
 
   /**
-   * constructs a <code> swap event</code> with the given indices
+   * constructs a swapevent with the given indices
    * 
    * @param index1 the first index to swap
    * @param index2 the second index to swap
@@ -34,12 +34,11 @@ public class SwapEvent<T> implements SortEvent<T> {
     arr[index2] = temporary;
   }
 
-  /*
-   * get afffected indices of the swap event
+  /**
+   * get affected indices of the swap event
    * 
    * @return list of the affected indices
    */
-
   public List<Integer> getAffectedIndices() {
     List<Integer> affectedIndices = new ArrayList<>();
     affectedIndices.add(index1);

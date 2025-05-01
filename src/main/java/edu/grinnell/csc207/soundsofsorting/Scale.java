@@ -56,6 +56,11 @@ public class Scale {
         instrument.noteOn(notes[index], emphasized ? EMPHASIZED_VELOCITY : REGULAR_VELOCITY);
     }
 
+    /**
+     * Plays a note of the scale through Swing's MIDI library.
+     * 
+     * @param index the index of the note to play within the scale
+     */
     public int get(int index) {
         if (index < 0 || index >= notes.length) {
             throw new IndexOutOfBoundsException(

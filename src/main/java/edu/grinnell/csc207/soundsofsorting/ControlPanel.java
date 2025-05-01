@@ -22,8 +22,8 @@ public class ControlPanel extends JPanel {
     private static final int FPS = 20;
 
     /** The MIDI note values for the B minor pentatonic scale */
-    public static final int[] bMinorPentatonicValues = new int[] { 46, 49, 51, 53, 56, 58, 61, 63, 65, 68, 70, 73, 75,
-            78, 82, 85, 87 };
+    public static final int[] bMinorPentatonicValues = new int[] { 46, 49, 51, 53, 56, 58, 61, 63,
+            65, 68, 70, 73, 75, 78, 82, 85, 87 };
 
     /** The MIDI note values for the chromatic scale */
     public static final int[] chromaticValues = new int[] { 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
@@ -139,18 +139,14 @@ public class ControlPanel extends JPanel {
                     return;
                 }
                 isSorting = true;
-
-                // Get a copy of the current shuffled notes
                 Integer[] notesCopy = new Integer[notes.size()];
                 for (int i = 0; i < notes.size(); i++) {
                     notesCopy[i] = notes.getNote(i);
                 }
 
-                // Generate sorting events
                 List<SortEvent<Integer>> events = generateEvents(
                         (String) sorts.getSelectedItem(), notesCopy);
 
-                // Reset the notesCopy since the generateEvents method already sorted it
                 for (int i = 0; i < notes.size(); i++) {
                     notesCopy[i] = notes.getNote(i);
                 }

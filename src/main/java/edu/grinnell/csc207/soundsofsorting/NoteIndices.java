@@ -1,7 +1,6 @@
 package edu.grinnell.csc207.soundsofsorting;
 
 import java.awt.Color;
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -61,6 +60,10 @@ public class NoteIndices {
         return notes1;
     }
 
+    /**
+     * @param index the index to get
+     * @return the value at the given index
+     */
     public int getNote(int index) {
         if (index >= 0 && index < size) {
             return indices[index];
@@ -102,13 +105,18 @@ public class NoteIndices {
         return index >= 0 && index < highlighted.length && highlighted[index];
     }
 
-    /** Clears all highlighted indices from this collection */
+    /**
+     * Clears all highlighted indices from this collection
+     */
     public void clearAllHighlighted() {
         for (int i = 0; i < highlighted.length; i++) {
             highlighted[i] = false;
         }
     }
 
+    /**
+     * @return the maximum value in the indices array
+     */
     public int getMaxValue() {
         int max = 0;
         for (int i = 0; i < size; i++) {
@@ -119,6 +127,9 @@ public class NoteIndices {
         return max;
     }
 
+    /**
+     * @return the minimum value in the indices array
+     */
     public Color getColor(int index) {
         if (isHighlighted(index)) {
             // If the note is highlighted, return a different color

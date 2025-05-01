@@ -13,7 +13,7 @@ public class ArrayPanel extends JPanel {
     public NoteIndices notes;
 
     /**
-     * Create a new <code>ArrayPanel</code> with the given notes and dimensions.
+     * Create a new ArrayPanel with the given notes and dimensions.
      * 
      * @param notes  the note indices
      * @param width  the width of the panel
@@ -24,6 +24,9 @@ public class ArrayPanel extends JPanel {
         this.setPreferredSize(new Dimension(width, height));
     }
 
+    /**
+     * paintComponent is called whenever the panel needs to be redrawn.
+     */
     @Override
     public void paintComponent(Graphics g) {
         g.setColor(getBackground());
