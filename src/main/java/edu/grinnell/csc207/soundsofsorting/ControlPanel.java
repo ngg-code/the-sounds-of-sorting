@@ -140,68 +140,68 @@ public class ControlPanel extends JPanel {
                 }
                 isSorting = true;
 
-               // Get a copy of the current shuffled notes
-               Integer[] notesCopy = new Integer[notes.size()];
-               for (int i = 0; i < notes.size(); i++) {
-                   notesCopy[i] = notes.getNote(i);
-               }
-               
-               // Generate sorting events
-               List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), notesCopy);
-               
-               // Reset the notesCopy since the generateEvents method already sorted it
-               for (int i = 0; i < notes.size(); i++) {
-                   notesCopy[i] = notes.getNote(i);
-               }
-               
-               // Schedule a timer to apply the events one by one
-               Timer timer = new Timer();
-               timer.schedule(new TimerTask() {
-                   private int index = 0;
+                // Get a copy of the current shuffled notes
+                Integer[] notesCopy = new Integer[notes.size()];
+                for (int i = 0; i < notes.size(); i++) {
+                    notesCopy[i] = notes.getNote(i);
+                }
 
-                   @Override
-                   public void run() {
-                       if (index < events.size()) {
-                           SortEvent<Integer> e = events.get(index++);
-                           
-                           // Apply the event to the notesCopy array
-                           e.apply(notesCopy);
-                           
-                           // Update the actual notes in NoteIndices
-                           for (int i = 0; i < notesCopy.length; i++) {
-                               notes.setNote(i, notesCopy[i]);
-                           }
-                           
-                           // Get affected indices and highlight them
-                           List<Integer> affected = e.getAffectedIndices();
-                           notes.clearAllHighlighted();
-                           for (int idx : affected) {
-                               if (idx >= 0 && idx < notes.size()) {
-                                   notes.highlightNote(idx);
-                                   
-                                   // Play sound for this note
-                                   if (idx < scale.size()) {
-                                       // Use the value at the index position as the scale index
-                                       int noteValue = notes.getNote(idx);
-                                       if (noteValue >= 0 && noteValue < scale.size()) {
-                                           scale.playNote(noteValue, e.isEmphasized());
-                                       }
-                                   }
-                               }
-                           }
-                           
-                           // Force the panel to redraw
-                           panel.repaint();
-                       } else {
-                           this.cancel();
-                           notes.clearAllHighlighted();
-                           panel.repaint();
-                           isSorting = false;
-                       }
-                   }
-               }, 0, toPeriod(FPS));
-           }
-       });
-       add(playButton);
-   }
+                // Generate sorting events
+                List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), notesCopy);
+
+                // Reset the notesCopy since the generateEvents method already sorted it
+                for (int i = 0; i < notes.size(); i++) {
+                    notesCopy[i] = notes.getNote(i);
+                }
+
+                // Schedule a timer to apply the events one by one
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    private int index = 0;
+
+                    @Override
+                    public void run() {
+                        if (index < events.size()) {
+                            SortEvent<Integer> e = events.get(index++);
+
+                            // Apply the event to the notesCopy array
+                            e.apply(notesCopy);
+
+                            // Update the actual notes in NoteIndices
+                            for (int i = 0; i < notesCopy.length; i++) {
+                                notes.setNote(i, notesCopy[i]);
+                            }
+
+                            // Get affected indices and highlight them
+                            List<Integer> affected = e.getAffectedIndices();
+                            notes.clearAllHighlighted();
+                            for (int idx : affected) {
+                                if (idx >= 0 && idx < notes.size()) {
+                                    notes.highlightNote(idx);
+
+                                    // Play sound for this note
+                                    if (idx < scale.size()) {
+                                        // Use the value at the index position as the scale index
+                                        int noteValue = notes.getNote(idx);
+                                        if (noteValue >= 0 && noteValue < scale.size()) {
+                                            scale.playNote(noteValue, e.isEmphasized());
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Force the panel to redraw
+                            panel.repaint();
+                        } else {
+                            this.cancel();
+                            notes.clearAllHighlighted();
+                            panel.repaint();
+                            isSorting = false;
+                        }
+                    }
+                }, 0, toPeriod(FPS));
+            }
+        });
+        add(playButton);
+    }
 }
