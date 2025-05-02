@@ -7,8 +7,8 @@ import java.util.ArrayList;
  * A SwapEvent logs a swap between two indices of the array.
  */
 public class SwapEvent<T> implements SortEvent<T> {
-  private final int index1;
-  private final int index2;
+    private final int index1;
+    private final int index2;
 
   /**
    * constructs a swapevent with the given indices
@@ -17,10 +17,10 @@ public class SwapEvent<T> implements SortEvent<T> {
    * @param index2 the second index to swap
    */
 
-  public SwapEvent(int index1, int index2) {
-    this.index1 = index1;
-    this.index2 = index2;
-  }
+   public SwapEvent(int index1, int index2) {
+       this.index1 = index1;
+       this.index2 = index2;
+   }
 
   /**
    * apply the swap event to the given array
@@ -29,9 +29,9 @@ public class SwapEvent<T> implements SortEvent<T> {
    */
 
   public void apply(T[] arr) {
-    T temporary = arr[index1];
-    arr[index1] = arr[index2];
-    arr[index2] = temporary;
+      T temporary = arr[index1];
+      arr[index1] = arr[index2];
+      arr[index2] = temporary;
   }
 
   /**
@@ -40,10 +40,10 @@ public class SwapEvent<T> implements SortEvent<T> {
    * @return list of the affected indices
    */
   public List<Integer> getAffectedIndices() {
-    List<Integer> affectedIndices = new ArrayList<>();
-    affectedIndices.add(index1);
-    affectedIndices.add(index2);
-    return affectedIndices;
+      List<Integer> affectedIndices = new ArrayList<>();
+      affectedIndices.add(index1);
+      affectedIndices.add(index2);
+      return affectedIndices;
   }
 
   /**
@@ -54,6 +54,6 @@ public class SwapEvent<T> implements SortEvent<T> {
    */
 
   public boolean isEmphasized() {
-    return true;
+      return true;
   }
 }
