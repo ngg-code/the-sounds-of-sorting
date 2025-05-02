@@ -127,27 +127,27 @@ public class Sorts {
         int n1 = m - l + 1;
         int n2 = r - m;
 
-        List<T> LeftArray = new ArrayList<>(n1);
-        List<T> RightArray = new ArrayList<>(n2);
+        List<T> leftArray = new ArrayList<>(n1);
+        List<T> rightArray = new ArrayList<>(n2);
 
         for (int i = 0; i < n1; ++i) {
             events.add(new CopyEvent<>(i, l + i));
-            LeftArray.add(arr[l + i]);
+            leftArray.add(arr[l + i]);
         }
         for (int j = 0; j < n2; ++j) {
             events.add(new CopyEvent<>(j, m + 1 + j));
-            RightArray.add(arr[m + 1 + j]);
+            rightArray.add(arr[m + 1 + j]);
         }
 
         int i = 0, j = 0;
         int k = l;
         while (i < n1 && j < n2) {
             events.add(new CompareEvent<>(l + i, m + 1 + j));
-            if (LeftArray.get(i).compareTo(RightArray.get(j)) <= 0) {
-                arr[k] = LeftArray.get(i);
+            if (leftArray.get(i).compareTo(rightArray.get(j)) <= 0) {
+                arr[k] = leftArray.get(i);
                 i++;
             } else {
-                arr[k] = RightArray.get(j);
+                arr[k] = rightArray.get(j);
                 j++;
             }
             k++;
@@ -155,14 +155,14 @@ public class Sorts {
 
         while (i < n1) {
             events.add(new CopyEvent<>(k, i));
-            arr[k] = LeftArray.get(i);
+            arr[k] = leftArray.get(i);
             i++;
             k++;
         }
 
         while (j < n2) {
             events.add(new CopyEvent<>(k, j));
-            arr[k] = RightArray.get(j);
+            arr[k] = rightArray.get(j);
             j++;
             k++;
         }
