@@ -60,6 +60,7 @@ public class Scale {
      * Plays a note of the scale through Swing's MIDI library.
      * 
      * @param index the index of the note to play within the scale
+     * @return the note value of the scale
      */
     public int get(int index) {
         if (index < 0 || index >= notes.length) {
