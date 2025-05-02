@@ -17,10 +17,10 @@ public class SwapEvent<T> implements SortEvent<T> {
    * @param index2 the second index to swap
    */
 
-   public SwapEvent(int index1, int index2) {
-       this.index1 = index1;
-       this.index2 = index2;
-   }
+    public SwapEvent(int index1, int index2) {
+        this.index1 = index1;
+        this.index2 = index2;
+    }
 
   /**
    * apply the swap event to the given array
@@ -28,23 +28,23 @@ public class SwapEvent<T> implements SortEvent<T> {
    * @param arr the array to swap
    */
 
-  public void apply(T[] arr) {
-      T temporary = arr[index1];
-      arr[index1] = arr[index2];
-      arr[index2] = temporary;
-  }
+    public void apply(T[] arr) {
+        T temporary = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temporary;
+    }
 
   /**
    * get affected indices of the swap event
    * 
    * @return list of the affected indices
    */
-  public List<Integer> getAffectedIndices() {
-      List<Integer> affectedIndices = new ArrayList<>();
-      affectedIndices.add(index1);
-      affectedIndices.add(index2);
-      return affectedIndices;
-  }
+    public List<Integer> getAffectedIndices() {
+        List<Integer> affectedIndices = new ArrayList<>();
+        affectedIndices.add(index1);
+        affectedIndices.add(index2);
+        return affectedIndices;
+    }
 
   /**
    * return true if this event should be emphasized by the visualizer/audibilizer.
@@ -53,7 +53,7 @@ public class SwapEvent<T> implements SortEvent<T> {
    *         visualizer/audibilizer.
    */
 
-  public boolean isEmphasized() {
-      return true;
-  }
+    public boolean isEmphasized() {
+        return true;
+    }
 }
