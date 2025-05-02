@@ -131,22 +131,22 @@ public class Sorts {
         List<T> rightArray = new ArrayList<>(n2);
 
         for (int i = 0; i < n1; ++i) {
-            events.add(new CopyEvent<>(i, l + i));
             leftArray.add(arr[l + i]);
         }
         for (int j = 0; j < n2; ++j) {
-            events.add(new CopyEvent<>(j, m + 1 + j));
             rightArray.add(arr[m + 1 + j]);
         }
 
         int i = 0, j = 0;
         int k = l;
         while (i < n1 && j < n2) {
-            events.add(new CompareEvent<>(l + i, m + 1 + j));
+            events.add(new CompareEvent<>(i, m + 1 + j));
             if (leftArray.get(i).compareTo(rightArray.get(j)) <= 0) {
+                events.add(new CopyEvent<>(k, i));
                 arr[k] = leftArray.get(i);
                 i++;
             } else {
+                events.add(new CopyEvent<>(k, m + 1 + j));
                 arr[k] = rightArray.get(j);
                 j++;
             }
@@ -161,24 +161,13 @@ public class Sorts {
         }
 
         while (j < n2) {
-            events.add(new CopyEvent<>(k, j));
+            events.add(new CopyEvent<>(k, j + m + 1));
             arr[k] = rightArray.get(j);
             j++;
             k++;
         }
 
         return events;
-    }
-
-    /**
-     * Merge sort method that sorts the array and returns a list of SortEvents.
-     * 
-     * @param <T> the type of elements in the array
-     * @param arr the array to sort
-     * @return the list of sort events
-     */
-    public static <T extends Comparable<? super T>> List<SortEvent<Integer>> mergeSort(T[] arr) {
-        return sort(arr, 0, arr.length - 1);
     }
 
     /**
@@ -201,6 +190,17 @@ public class Sorts {
             return merge(arr, l, m, r);
         }
         return null;
+    }
+
+    /**
+     * Merge sort method that sorts the array and returns a list of SortEvents.
+     * 
+     * @param <T> the type of elements in the array
+     * @param arr the array to sort
+     * @return the list of sort events
+     */
+    public static <T extends Comparable<? super T>> List<SortEvent<Integer>> mergeSort(T[] arr) {
+        return sort(arr, 0, arr.length - 1);
     }
 
     /**
