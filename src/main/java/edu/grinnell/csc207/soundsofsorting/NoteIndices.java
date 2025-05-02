@@ -128,6 +128,8 @@ public class NoteIndices {
     }
 
     /**
+     * @param index the index to get the color for
+     * 
      * @return the minimum value in the indices array
      */
     public Color getColor(int index) {
@@ -150,6 +152,9 @@ public class NoteIndices {
         }
     }
 
+    /**
+     * @return the size of this NoteIndices object
+     */
     public int size() {
         return size;
     }

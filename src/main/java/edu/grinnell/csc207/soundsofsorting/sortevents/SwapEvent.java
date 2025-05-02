@@ -56,5 +56,4 @@ public class SwapEvent<T> implements SortEvent<T> {
   public boolean isEmphasized() {
     return true;
   }
-
 }
